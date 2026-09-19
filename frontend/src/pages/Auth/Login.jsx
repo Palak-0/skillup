@@ -84,7 +84,7 @@ export default function LoginPage({ onAuth, onSwitch }) {
             <div>
               <label className="block text-sm font-semibold text-slate-700 mb-1.5">Email</label>
               <input
-                className={`w-full px-4 py-2.5 rounded-xl border ${errors.email ? "border-red-300 focus:ring-red-100" : "border-slate-200 focus:border-indigo-500 focus:ring-indigo-100"} bg-slate-50 focus:bg-white transition-all duration-200 outline-none focus:ring-4`}
+                className={`w-full px-4 py-2.5 rounded-xl border text-slate-900 ${errors.email ? "border-red-300 focus:ring-red-100" : "border-slate-200 focus:border-indigo-500 focus:ring-indigo-100"} bg-slate-50 focus:bg-white transition-all duration-200 outline-none focus:ring-4`}
                 type="email"
                 placeholder="you@example.com"
                 value={form.email}
@@ -98,11 +98,14 @@ export default function LoginPage({ onAuth, onSwitch }) {
               <label className="block text-sm font-semibold text-slate-700 mb-1.5">Password</label>
               <div className="relative">
                 <input
-                  className={`w-full pl-4 pr-12 py-2.5 rounded-xl border ${errors.password ? "border-red-300 focus:ring-red-100" : "border-slate-200 focus:border-indigo-500 focus:ring-indigo-100"} bg-slate-50 focus:bg-white transition-all duration-200 outline-none focus:ring-4`}
+                  className={`w-full pl-4 pr-12 py-2.5 rounded-xl border text-slate-900 ${errors.password ? "border-red-300 focus:ring-red-100" : "border-slate-200 focus:border-indigo-500 focus:ring-indigo-100"} bg-slate-50 focus:bg-white transition-all duration-200 outline-none focus:ring-4`}
                   type={showPassword ? "text" : "password"}
                   placeholder="••••••••"
                   value={form.password}
-                  onChange={(e) => setForm({ ...form, password: e.target.value })}
+                  onChange={(e) => {
+                    console.log("Password:", e.target.value);
+                    setForm({ ...form, password: e.target.value });
+                  }}
                 />
                 <button 
                   type="button" 
