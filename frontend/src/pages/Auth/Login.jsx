@@ -42,15 +42,15 @@ export default function LoginPage({ onAuth, onSwitch }) {
         <div className="absolute top-0 left-0 w-full h-full opacity-10 pointer-events-none" style={{ backgroundImage: 'radial-gradient(circle at 2px 2px, white 1px, transparent 0)', backgroundSize: '40px 40px' }}></div>
         <div className="absolute -bottom-32 -left-32 w-96 h-96 bg-indigo-500 rounded-full mix-blend-multiply filter blur-3xl opacity-50 animate-blob"></div>
         <div className="absolute -top-32 -right-32 w-96 h-96 bg-purple-500 rounded-full mix-blend-multiply filter blur-3xl opacity-50 animate-blob animation-delay-2000"></div>
-        
+
         <div className="relative z-10 flex flex-col max-w-lg text-white">
           <div className="flex items-center gap-3 mb-12">
-            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"><path d="M12 2L2 7l10 5 10-5-10-5z"></path><path d="M2 17l10 5 10-5"></path><path d="M2 12l10 5 10-5"></path></svg> 
+            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"><path d="M12 2L2 7l10 5 10-5-10-5z"></path><path d="M2 17l10 5 10-5"></path><path d="M2 12l10 5 10-5"></path></svg>
             <span className="text-2xl font-light tracking-widest uppercase">LEARNOS</span>
           </div>
-          
+
           <h1 className="text-5xl font-bold leading-tight mb-6 tracking-tight">
-            Welcome back to<br/><span className="text-indigo-400">excellence.</span>
+            Welcome back to<br /><span className="text-indigo-400">excellence.</span>
           </h1>
           <p className="text-indigo-200 text-lg font-light leading-relaxed mb-12">
             Log in to pick up where you left off. Access your courses, track your progress, and continue growing your skills today.
@@ -61,10 +61,10 @@ export default function LoginPage({ onAuth, onSwitch }) {
       {/* RIGHT SIDE - LOGIN FORM */}
       <div className="flex w-full lg:w-1/2 items-center justify-center p-6 sm:p-12">
         <div className="w-full max-w-md bg-white rounded-2xl shadow-xl shadow-slate-200/50 p-8 sm:p-10 border border-slate-100 fade-up relative z-10">
-          
+
           {/* Mobile Logo */}
           <div className="lg:hidden flex items-center justify-center gap-2 mb-8 text-slate-800">
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" className="text-indigo-600"><path d="M12 2L2 7l10 5 10-5-10-5z"></path><path d="M2 17l10 5 10-5"></path><path d="M2 12l10 5 10-5"></path></svg> 
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" className="text-indigo-600"><path d="M12 2L2 7l10 5 10-5-10-5z"></path><path d="M2 17l10 5 10-5"></path><path d="M2 12l10 5 10-5"></path></svg>
             <span className="text-xl font-light tracking-widest uppercase">LEARNOS</span>
           </div>
 
@@ -98,17 +98,14 @@ export default function LoginPage({ onAuth, onSwitch }) {
               <label className="block text-sm font-semibold text-slate-700 mb-1.5">Password</label>
               <div className="relative">
                 <input
-                  className={`w-full pl-4 pr-12 py-2.5 rounded-xl border text-slate-900 ${errors.password ? "border-red-300 focus:ring-red-100" : "border-slate-200 focus:border-indigo-500 focus:ring-indigo-100"} bg-slate-50 focus:bg-white transition-all duration-200 outline-none focus:ring-4`}
-                  type={showPassword ? "text" : "password"}
-                  placeholder="••••••••"
+                  className="w-full px-4 py-2.5 rounded-xl border border-slate-200 text-slate-900 bg-white outline-none"
+                  type="text"
+                  placeholder="Enter password"
                   value={form.password}
-                  onChange={(e) => {
-                    console.log("Password:", e.target.value);
-                    setForm({ ...form, password: e.target.value });
-                  }}
+                  onChange={(e) => setForm({ ...form, password: e.target.value })}
                 />
-                <button 
-                  type="button" 
+                <button
+                  type="button"
                   className="absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-600 transition-colors"
                   onClick={() => setShowPassword(!showPassword)}
                 >
