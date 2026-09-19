@@ -68,54 +68,63 @@ export default function Sidebar({ activePage, setPage, user, onLogout }) {
   return (
     <div className="sidebar">
       <div className="sidebar-logo">
-        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"><path d="M12 2L2 7l10 5 10-5-10-5z"></path><path d="M2 17l10 5 10-5"></path><path d="M2 12l10 5 10-5"></path></svg>
-        LearnOS
+        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="url(#logo-gradient)" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+          <defs>
+            <linearGradient id="logo-gradient" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" stopColor="var(--primary)" />
+              <stop offset="100%" stopColor="var(--secondary)" />
+            </linearGradient>
+          </defs>
+          <path d="M12 2L2 7l10 5 10-5-10-5z"></path>
+          <path d="M2 17l10 5 10-5"></path>
+          <path d="M2 12l10 5 10-5"></path>
+        </svg>
+        <span style={{
+          background: 'linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%)',
+          WebkitBackgroundClip: 'text',
+          WebkitTextFillColor: 'transparent'
+        }}>LearnOS</span>
       </div>
 
-      <nav className="sidebar-nav" style={{ padding: '0 16px' }}>
-        <div className="nav-section" style={{ paddingLeft: '16px' }}>Main</div>
+      <nav className="sidebar-nav">
+        <div className="nav-section">Main</div>
 
         {nav.map((item) => (
           <div
             key={item.page}
             className={`nav-item ${activePage === item.page ? "active" : ""}`}
             onClick={() => setPage(item.page)}
-            style={{ 
-              borderRadius: 'var(--radius-sm)', 
-              marginBottom: '4px',
-              borderLeft: 'none',
-              padding: '12px 16px'
-            }}
           >
-            <span className="nav-icon" style={{ 
+            <span className="nav-icon" style={{
               display: 'flex', 
               alignItems: 'center', 
               justifyContent: 'center',
-              width: '32px',
-              height: '32px',
-              borderRadius: '8px',
-              background: activePage === item.page ? 'var(--accent-light)' : 'transparent',
-              color: activePage === item.page ? 'var(--accent)' : 'inherit',
+              width: '36px',
+              height: '36px',
+              borderRadius: '10px',
+              background: activePage === item.page ? 'linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%)' : 'var(--surface2)',
+              color: activePage === item.page ? 'white' : 'var(--text-secondary)',
+              boxShadow: activePage === item.page ? 'var(--shadow-glow)' : 'none',
               transition: 'var(--transition)'
             }}>
               {item.icon}
             </span>
-            <span style={{ fontWeight: activePage === item.page ? 600 : 400 }}>{item.label}</span>
+            <span>{item.label}</span>
           </div>
         ))}
       </nav>
 
-      <div className="sidebar-footer" style={{ padding: '24px 16px 0', borderTop: '1px solid var(--border)' }}>
-        <div className="user-card card hover-card" onClick={onLogout} style={{ padding: '12px', border: 'none', background: 'var(--surface2)', borderRadius: '12px' }}>
-          <Avatar name={user?.name || "User"} color="var(--accent)" />
+      <div className="sidebar-footer">
+        <div className="user-card card" onClick={onLogout} style={{ padding: '12px', border: 'none', background: 'transparent', boxShadow: 'none' }}>
+          <Avatar name={user?.name || "User"} color="var(--primary)" />
 
           <div className="user-info">
-            <div className="user-name" style={{ fontSize: '13px', fontWeight: 600 }}>{user?.name}</div>
-            <div className="user-role" style={{ fontSize: '11px', color: 'var(--text-secondary)' }}>
+            <div className="user-name">{user?.name}</div>
+            <div className="user-role">
               {user?.role === "ADMIN" ? "Administrator" : (user?.role === "INSTRUCTOR" ? "Instructor" : "Student")}
             </div>
           </div>
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" style={{ opacity: 0.5 }}><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path><polyline points="16 17 21 12 16 7"></polyline><line x1="21" y1="12" x2="9" y2="12"></line></svg>
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" style={{ opacity: 0.5, color: 'var(--text-secondary)' }}><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path><polyline points="16 17 21 12 16 7"></polyline><line x1="21" y1="12" x2="9" y2="12"></line></svg>
         </div>
       </div>
     </div>

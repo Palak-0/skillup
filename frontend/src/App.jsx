@@ -26,6 +26,19 @@ export default function App() {
   const [page, setPage] = useState("dashboard");
   const [activeCourse, setActiveCourse] = useState(null);
   const [loading, setLoading] = useState(true);
+  
+  const [theme, setTheme] = useState(() => {
+    return localStorage.getItem("theme") || "light";
+  });
+
+  useEffect(() => {
+    localStorage.setItem("theme", theme);
+    if (theme === "dark") {
+      document.documentElement.classList.add("dark");
+    } else {
+      document.documentElement.classList.remove("dark");
+    }
+  }, [theme]);
 
   useEffect(() => {
     const checkAuth = async () => {
@@ -115,7 +128,7 @@ export default function App() {
         }}
       />
       <div className="main-content">
-        <Topbar page={page} />
+        <Topbar page={page} theme={theme} setTheme={setTheme} />
         {renderPage()}
       </div>
     </div>
