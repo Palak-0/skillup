@@ -12,14 +12,19 @@ app.use(cookieParser());
 
 // CORS
 const allowedOrigins = process.env.FRONTEND_URL
-  ? process.env.FRONTEND_URL.split(",").map(item => item.trim().replace(/\/$/, ""))
+  ? process.env.FRONTEND_URL
+    .split(",")
+    .map((item) => item.trim().replace(/\/$/, ""))
   : [];
 
 app.use(
   cors({
     origin: function (origin, callback) {
+      // Same-origin requests / server requests
       if (!origin) return callback(null, true);
+
       const normalizedOrigin = origin.replace(/\/$/, "");
+
       if (
         normalizedOrigin.startsWith("http://localhost:") ||
         allowedOrigins.includes(normalizedOrigin) ||
@@ -27,13 +32,14 @@ app.use(
       ) {
         return callback(null, true);
       }
+
       return callback(new Error("Not allowed by CORS"));
     },
     credentials: true,
-  }),
+  })
 );
 
-// routes
+// API routes
 app.use("/api/auth", require("./routes/authRoutes"));
 app.use("/api/courses", require("./routes/courseRoutes"));
 app.use("/api/lectures", require("./routes/lectureRoutes"));
@@ -46,12 +52,25 @@ app.use("/api/admin", require("./routes/adminRoutes"));
 app.use("/api/upload", require("./routes/uploadRoutes"));
 app.use("/api/notifications", require("./routes/notificationRoutes"));
 
-// mount static path
+// Uploaded files
 app.use("/uploads", express.static(path.join(__dirname, "../uploads")));
 
-// test route
-app.get("/", (req, res) => {
-  res.send("API is running...");
+// --------------------------------------------------
+// REACT FRONTEND
+// --------------------------------------------------
+
+const frontendPath = path.join(__dirname, "../../frontend/build");
+
+app.use(express.static(frontendPath));
+
+// React routing fallback
+app.get("*", (req, res, next) => {
+  // API routes should not be handled by React
+  if (req.path.startsWith("/api/")) {
+    return next();
+  }
+
+  res.sendFile(path.join(frontendPath, "index.html"));
 });
 
 // 404 handler
