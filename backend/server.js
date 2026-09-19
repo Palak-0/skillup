@@ -16,23 +16,7 @@ const startServer = async () => {
     
 
     // socket setup
-    const io = new Server(server, {
-      cors: {
-        origin: function (origin, callback) {
-          if (!origin) return callback(null, true);
-          const normalizedOrigin = origin.replace(/\/$/, "");
-          if (
-            normalizedOrigin.startsWith("http://localhost:") ||
-            allowedOrigins.includes(normalizedOrigin) ||
-            normalizedOrigin.endsWith(".vercel.app")
-          ) {
-            return callback(null, true);
-          }
-          return callback(new Error("Not allowed by CORS"));
-        },
-        credentials: true,
-      },
-    });
+    const io = new Server(server);
 
     // socket globally accessible
     global.io = io;
