@@ -13,9 +13,7 @@ const startServer = async () => {
 
     const server = http.createServer(app);
 
-    const allowedOrigins = process.env.FRONTEND_URL
-      ? process.env.FRONTEND_URL.split(",").map(item => item.trim().replace(/\/$/, ""))
-      : [];
+    
 
     // socket setup
     const io = new Server(server, {

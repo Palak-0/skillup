@@ -1,6 +1,5 @@
 const express = require("express");
 const errorMiddleware = require("./middlewares/errorMiddleware");
-const cors = require("cors");
 const cookieParser = require("cookie-parser");
 const path = require("path");
 
@@ -11,33 +10,7 @@ app.use(express.json());
 app.use(cookieParser());
 
 // CORS
-const allowedOrigins = process.env.FRONTEND_URL
-  ? process.env.FRONTEND_URL
-    .split(",")
-    .map((item) => item.trim().replace(/\/$/, ""))
-  : [];
 
-app.use(
-  cors({
-    origin: function (origin, callback) {
-      // Same-origin requests / server requests
-      if (!origin) return callback(null, true);
-
-      const normalizedOrigin = origin.replace(/\/$/, "");
-
-      if (
-        normalizedOrigin.startsWith("http://localhost:") ||
-        allowedOrigins.includes(normalizedOrigin) ||
-        normalizedOrigin.endsWith(".vercel.app")
-      ) {
-        return callback(null, true);
-      }
-
-      return callback(new Error("Not allowed by CORS"));
-    },
-    credentials: true,
-  })
-);
 
 // API routes
 app.use("/api/auth", require("./routes/authRoutes"));
